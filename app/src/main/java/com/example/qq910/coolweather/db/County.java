@@ -1,15 +1,16 @@
 package com.example.qq910.coolweather.db;
 
+import org.litepal.crud.DataSupport;
+
 /**
- * Created by qq910 on 2018/5/8.
- * 县
+ * Created by qq910 on 2018/5/15.
  */
 
-public class County {
+public class County extends DataSupport {
     private int id;
-    private String countyName;  //县名字
-    private String weatherId;   //县的天气id
-    private int cityId; //当前市的id值
+    private String countyName;
+    private String weatherId;
+    private int cityId;
 
     public int getId() {
         return id;

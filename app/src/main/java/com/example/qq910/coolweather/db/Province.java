@@ -3,22 +3,13 @@ package com.example.qq910.coolweather.db;
 import org.litepal.crud.DataSupport;
 
 /**
- * Created by qq910 on 2018/5/8.
- * 省
+ * Created by qq910 on 2018/5/14.
  */
 
-public class Province extends DataSupport {
-    private int id; //id是必须的
-    private String provinceName;//省名
-    private int provinceCode;//省的代号
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+public class Province extends DataSupport{
+    private String provinceName;
+    private int id;
+    private int provinceCode;
 
     public String getProvinceName() {
         return provinceName;
@@ -26,6 +17,14 @@ public class Province extends DataSupport {
 
     public void setProvinceName(String provinceName) {
         this.provinceName = provinceName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getProvinceCode() {
