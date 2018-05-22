@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //从缓存中判断,看是否存在数据,如果存在数据表示之前请求过天气数据,就比没药再次选择城市
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         if (sharedPreferences.getString("weather", null) != null) {
             Intent intent = new Intent(this, WeatherActivity.class);

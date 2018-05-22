@@ -4,7 +4,6 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
-
 /**
  * Created by qq910 on 2018/5/15.
  * 网络请求工具类

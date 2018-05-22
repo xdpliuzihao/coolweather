@@ -1,10 +1,15 @@
 package com.example.qq910.coolweather;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.ToolbarWidgetWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +57,6 @@ public class ChooseAreaFragment extends Fragment {
     private City selectedCity;
     private ProgressDialog progressDialog;
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -79,23 +83,19 @@ public class ChooseAreaFragment extends Fragment {
                     queryCounty();
                 } else if (currentLevel == LEVEL_COUNTY) {
                     String weatherId = countyList.get(position).getWeatherId();
-                    Intent intent = new Intent(getActivity(), WeatherActivity.class);
-                    intent.putExtra("weather_id",weatherId);
-                    startActivity(intent);
-                    getActivity().finish();
+                    if (getActivity() instanceof MainActivity) {
+                        Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                        intent.putExtra("weather_id", weatherId);
+                        startActivity(intent);
+                        getActivity().finish();
+                    } else if (getActivity() instanceof WeatherActivity) {
+                        WeatherActivity activity = (WeatherActivity) getActivity();
+                        activity.mDrawerLayoutS.closeDrawers();
+                        activity.mSwipeRefreshLayout.setRefreshing(true);
+                        activity.requestWeather(weatherId);
+                    }
+
                 }
-
-
-
-
-//
-//                else if (currentLevel == LEVEL_COUNTY){
-//                    String weatherId = countyList.get(position).getWeatherId();
-//                    Intent intent = new Intent(getActivity(),WeatherActivity.class);
-//                    intent.putExtra("weather_id",weatherId);
-//                    startActivity(intent);
-//                    getActivity().finish();
-//                }
 
                 mBackButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -176,7 +176,7 @@ public class ChooseAreaFragment extends Fragment {
             int provinceCode = selectedProvince.getProvinceCode();
             int cityCode = selectedCity.getCityCode();
             String address = "http://guolin.tech/api/china/" + provinceCode + "/" + cityCode;
-            queryFromServer(address,"county");
+            queryFromServer(address, "county");
             Toast.makeText(getActivity(), "queryCounty()服务器中拿数据", Toast.LENGTH_SHORT).show();
         }
     }
