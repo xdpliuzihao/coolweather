@@ -1,5 +1,6 @@
 package com.example.qq910.coolweather;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.qq910.coolweather.gson.Forecast;
 import com.example.qq910.coolweather.gson.Weather;
+import com.example.qq910.coolweather.service.AutoUpdateService;
 import com.example.qq910.coolweather.util.HttpUtil;
 import com.example.qq910.coolweather.util.Utillty;
 
@@ -254,6 +256,8 @@ public class WeatherActivity extends AppCompatActivity {
         mSportText.setText(sport);
         mWeatherLayout.setVisibility(View.VISIBLE); //设置完数据  让他重新显示
 
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
 
     }
 
